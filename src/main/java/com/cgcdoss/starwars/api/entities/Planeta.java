@@ -1,5 +1,7 @@
 package com.cgcdoss.starwars.api.entities;
 
+import javax.persistence.Transient;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,8 +17,14 @@ public class Planeta {
 	private String nome;
 	private String clima;
 	private String terreno;
+	private Integer qtdFilmes = 0;
 
 	public Planeta() {
+	}
+	
+	public Planeta(String nome, Integer qtdFilmes) {
+		this.nome = nome;
+		this.qtdFilmes = qtdFilmes;
 	}
 
 	@Id
@@ -54,6 +62,21 @@ public class Planeta {
 
 	public void setTerreno(String terreno) {
 		this.terreno = terreno;
+	}
+
+	@Transient
+	public Integer getQtdFilmes() {
+		return qtdFilmes;
+	}
+
+	public void setQtdFilmes(Integer qtdFilmes) {
+		this.qtdFilmes = qtdFilmes;
+	}
+
+	@Override
+	public String toString() {
+		return "Planeta [id=" + id + ", nome=" + nome + ", clima=" + clima + ", terreno=" + terreno + ", qtdFilmes="
+				+ qtdFilmes + "]";
 	}
 
 }
