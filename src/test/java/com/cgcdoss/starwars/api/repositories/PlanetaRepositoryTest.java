@@ -22,7 +22,8 @@ public class PlanetaRepositoryTest {
 	private PlanetaRepository planetaRepository;
 	
 	private static final String NOME = "Terra";
-	private static final Long ID = Long.valueOf(1);
+	private String id = "1";
+	
 
 	@Before
 	public void setUp() throws Exception {
@@ -30,23 +31,23 @@ public class PlanetaRepositoryTest {
 		planeta.setNome("Terra");
 		planeta.setClima("Temperado, Tropical");
 		planeta.setTerreno("Florestas, Mares");
-		this.planetaRepository.save(planeta);
+		id = this.planetaRepository.save(planeta).getId();
 	}
 	
 	@After
-    public final void tearDown() { 
-		this.planetaRepository.deleteAll();
+    public final void tearDown() {
+		this.planetaRepository.deleteById(id);
 	}
 
 	@Test
 	public void testBuscarPorId() {
-		Planeta planeta = this.planetaRepository.findById(ID).get();
+		Planeta planeta = this.planetaRepository.findById(id).get();
 		
-		assertEquals(ID, planeta.getId());
+		assertEquals(id, planeta.getId());
 	}
 	
 	@Test
-	public void testBuscarPorCnpj() {
+	public void testBuscarPorNome() {
 		Planeta planeta = this.planetaRepository.findByNome(NOME).get();
 		
 		assertEquals(NOME, planeta.getNome());

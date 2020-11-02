@@ -1,18 +1,25 @@
 package com.cgcdoss.starwars.api.repositories;
 
+import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Repository;
 
 import com.cgcdoss.starwars.api.entities.Planeta;
 
-public interface PlanetaRepository extends JpaRepository<Planeta, Long> {
+@Repository
+public interface PlanetaRepository {
 
-	@Transactional(readOnly = true)
-	Optional<Planeta> findById(Long id);
+	Planeta save(Planeta planeta);
 
-	@Transactional(readOnly = true)
+	List<Planeta> findAll();
+
+	long deleteById(String id);
+
+	public long deleteAll();
+
+	Optional<Planeta> findById(String id);
+
 	Optional<Planeta> findByNome(String nome);
 
 }
