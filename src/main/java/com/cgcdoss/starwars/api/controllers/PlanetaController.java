@@ -75,8 +75,7 @@ public class PlanetaController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		planeta.get().setQtdFilmes(planetasComFilmes.stream().filter(p -> p.getNome().equals(planeta.get().getNome()))
-				.collect(Collectors.toList()).get(0).getQtdFilmes());
+		setQtdFilmes(planeta.get());
 
 		response.setData(planeta.get());
 		return ResponseEntity.ok(response);
@@ -94,8 +93,7 @@ public class PlanetaController {
 			return ResponseEntity.badRequest().body(response);
 		}
 
-		planeta.get().setQtdFilmes(planetasComFilmes.stream().filter(p -> p.getNome().equals(planeta.get().getNome()))
-				.collect(Collectors.toList()).get(0).getQtdFilmes());
+		setQtdFilmes(planeta.get());
 
 		response.setData(planeta.get());
 		return ResponseEntity.ok(response);
@@ -106,8 +104,7 @@ public class PlanetaController {
 		List<Planeta> planetas = planetaRepository.findAll();
 
 		planetas.forEach(planeta -> {
-			planeta.setQtdFilmes(planetasComFilmes.stream().filter(p -> p.getNome().equals(planeta.getNome()))
-					.collect(Collectors.toList()).get(0).getQtdFilmes());
+			setQtdFilmes(planeta);
 		});
 
 		return ResponseEntity.ok(planetas);
@@ -132,6 +129,11 @@ public class PlanetaController {
 	private void validaPlanetasExistentes(Planeta planeta, BindingResult result) {
 		if (planetaRepository.findByNome(planeta.getNome()).isPresent())
 			result.addError(new ObjectError("planeta", "Planeta com nome '" + planeta.getNome() + "' já existe"));
+	}
+
+	private void setQtdFilmes(Planeta planeta) {
+		planeta.setQtdFilmes(planetasComFilmes.stream().filter(p -> p.getNome().equals(planeta.getNome()))
+				.collect(Collectors.toList()).get(0).getQtdFilmes());
 	}
 
 }
