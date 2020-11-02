@@ -36,7 +36,7 @@ public class PlanetaRepositoryTest {
 	
 	@After
     public final void tearDown() {
-		this.planetaRepository.deleteAll();
+		this.planetaRepository.deleteById(id);
 	}
 
 	@Test

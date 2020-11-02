@@ -1,4 +1,4 @@
-package com.cgcdoss.starwars.api.controllers;
+package com.cgcdoss.starwars.api.repositories;
 
 import static com.mongodb.client.model.Filters.eq;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 
 import com.cgcdoss.starwars.api.entities.Planeta;
-import com.cgcdoss.starwars.api.repositories.PlanetaRepository;
 import com.mongodb.ConnectionString;
 import com.mongodb.MongoClientSettings;
 import com.mongodb.ReadConcern;
