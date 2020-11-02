@@ -22,7 +22,7 @@ public class PlanetaRepositoryTest {
 	private PlanetaRepository planetaRepository;
 	
 	private static final String NOME = "Terra";
-	private static final Long ID = 1L;
+	private static final Long ID = Long.valueOf(1);
 
 	@Before
 	public void setUp() throws Exception {
