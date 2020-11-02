@@ -113,7 +113,7 @@ public class PlanetaController {
 	}
 
 	private void validaPlanetasExistentes(Planeta planeta, BindingResult result) {
-		if (planetaRepository.findByNome(planeta.getNome()) != null)
+		if (planetaRepository.findByNome(planeta.getNome()).isPresent())
 			result.addError(new ObjectError("planeta", "Planeta com nome '" + planeta.getNome() + "' já existe"));
 	}
 
