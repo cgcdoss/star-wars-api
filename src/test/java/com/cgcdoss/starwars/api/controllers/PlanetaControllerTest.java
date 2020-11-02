@@ -40,7 +40,7 @@ public class PlanetaControllerTest {
 
 	private static final String BUSCAR_PLANETA_ID_URL = "/planeta/id/";
 	private static final String BUSCAR_PLANETA_NOME_URL = "/planeta/nome/";
-	private static final Long ID = Long.valueOf(1);
+	private static final String ID = "1";
 	private static final String NOME = "Alderaan";
 	private static final String CLIMA = "temperate";
 	private static final String TERRENO = "grasslands, mountains";
@@ -49,7 +49,7 @@ public class PlanetaControllerTest {
 	@Test
 	@WithMockUser
 	public void testBuscarPlanetaPorId() throws Exception {
-		BDDMockito.given(this.planetaRepository.findById(Mockito.anyLong())).willReturn(Optional.of(this.obterDadosPlaneta()));
+		BDDMockito.given(this.planetaRepository.findById(Mockito.anyString())).willReturn(Optional.of(this.obterDadosPlaneta()));
 
 		mvc.perform(MockMvcRequestBuilders.get(BUSCAR_PLANETA_ID_URL + ID).accept(MediaType.APPLICATION_JSON))
 		.andExpect(status().isOk()).andExpect(jsonPath("$.data.id").value(ID))

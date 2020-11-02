@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cgcdoss.starwars.api.entities.Planeta;
@@ -39,11 +41,13 @@ public class PlanetaController {
 
 	List<Planeta> planetasComFilmes = new ArrayList<>();
 
-	public PlanetaController() {
+	public PlanetaController(PlanetaRepository planetaRepository) {
+		this.planetaRepository = planetaRepository;
 		planetasComFilmes = PlanetaUtils.preparaQtdFilmes();
 	}
 
 	@PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<Response<Planeta>> cadastrar(@Valid @RequestBody Planeta planeta, BindingResult result)
 			throws NoSuchAlgorithmException {
 		log.info("Cadastrando planeta: {}", planeta.toString());
@@ -64,7 +68,7 @@ public class PlanetaController {
 	}
 
 	@GetMapping(value = "/id/{id}")
-	public ResponseEntity<Response<Planeta>> buscarPorId(@PathVariable("id") Long id) {
+	public ResponseEntity<Response<Planeta>> buscarPorId(@PathVariable("id") String id) {
 		log.info("Buscando planetas por id: {}", id);
 		Response<Planeta> response = new Response<Planeta>();
 		Optional<Planeta> planeta = planetaRepository.findById(id);
@@ -111,7 +115,7 @@ public class PlanetaController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Response<Planeta>> delete(@PathVariable("id") Long id) {
+	public ResponseEntity<Response<Planeta>> delete(@PathVariable("id") String id) {
 		Response<Planeta> response = new Response<Planeta>();
 		Optional<Planeta> planeta = planetaRepository.findById(id);
 

@@ -1,43 +1,44 @@
 package com.cgcdoss.starwars.api.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Transient;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
 @Entity
-@Table(name = "planetas")
 public class Planeta {
 
-	private Long id;
+	@Id
+	private String id;
 	private String nome;
 	private String clima;
 	private String terreno;
-	private Integer qtdFilmes = 0;
+
+	@Transient
+	@JsonSerialize
+	@JsonDeserialize
+	private Integer qtdFilmes;
 
 	public Planeta() {
 	}
-	
+
 	public Planeta(String nome, Integer qtdFilmes) {
 		this.nome = nome;
 		this.qtdFilmes = qtdFilmes;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
+	@JsonSerialize(using = ToStringSerializer.class)
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	@Column(name = "nome", nullable = false)
 	public String getNome() {
 		return nome;
 	}
@@ -46,7 +47,6 @@ public class Planeta {
 		this.nome = nome;
 	}
 
-	@Column(name = "clima", nullable = false)
 	public String getClima() {
 		return clima;
 	}
@@ -55,7 +55,6 @@ public class Planeta {
 		this.clima = clima;
 	}
 
-	@Column(name = "terreno", nullable = false)
 	public String getTerreno() {
 		return terreno;
 	}
@@ -64,7 +63,6 @@ public class Planeta {
 		this.terreno = terreno;
 	}
 
-	@Transient
 	public Integer getQtdFilmes() {
 		return qtdFilmes;
 	}
