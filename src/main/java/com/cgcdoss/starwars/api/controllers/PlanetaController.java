@@ -40,7 +40,7 @@ public class PlanetaController {
 	List<Planeta> planetasComFilmes = new ArrayList<>();
 
 	public PlanetaController() {
-		planetasComFilmes = PlanetaUtils.preparaQtdFilmes(log);
+		planetasComFilmes = PlanetaUtils.preparaQtdFilmes();
 	}
 
 	@PostMapping

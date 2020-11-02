@@ -17,8 +17,7 @@ public class PlanetaUtilsTest {
 
 	@Test
 	public void testApi() {
-		Logger log = LoggerFactory.getLogger(PlanetaUtilsTest.class);
-		assertEquals(PlanetaUtils.preparaQtdFilmes(log).size(), 60);
+		assertEquals(PlanetaUtils.preparaQtdFilmes().size(), 60);
 	}
 
 }

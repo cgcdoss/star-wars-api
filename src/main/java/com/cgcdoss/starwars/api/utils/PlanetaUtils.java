@@ -9,15 +9,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import com.cgcdoss.starwars.api.controllers.PlanetaController;
 import com.cgcdoss.starwars.api.entities.Planeta;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 public class PlanetaUtils {
 
-	public static List<Planeta> preparaQtdFilmes(Logger log) {
+	public static List<Planeta> preparaQtdFilmes() {
+		Logger log = LoggerFactory.getLogger(PlanetaUtils.class);
 		List<Planeta> planetasComFilmes = new ArrayList<>();
+		
 		for (int i = 1; i <= 6; i++) {
 			try {
 				String url = "https://swapi.dev/api/planets/?page=" + i;
