@@ -115,8 +115,8 @@ public class PlanetaController {
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Response<Planeta>> delete(@PathVariable("id") String id) {
-		Response<Planeta> response = new Response<Planeta>();
+	public ResponseEntity<Response<String>> delete(@PathVariable("id") String id) {
+		Response<String> response = new Response<String>();
 		Optional<Planeta> planeta = planetaRepository.findById(id);
 
 		if (!planeta.isPresent()) {
@@ -126,8 +126,7 @@ public class PlanetaController {
 
 		planetaRepository.deleteById(id);
 
-		response.setData(planeta.get());
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok(new Response<String>());
 	}
 
 	private void validaPlanetasExistentes(Planeta planeta, BindingResult result) {
