@@ -47,7 +47,7 @@ public class PlanetaRepositoryTest {
 	}
 	
 	@Test
-	public void testBuscarPorCnpj() {
+	public void testBuscarPorNome() {
 		Planeta planeta = this.planetaRepository.findByNome(NOME).get();
 		
 		assertEquals(NOME, planeta.getNome());
